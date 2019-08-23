@@ -106,7 +106,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("var mongoURI = 'mongodb://localhost/';\nvar mongoPort = '27017';\nvar dbName = 'chat';\nvar dbConfig = {\n  conStr: mongoURI + dbName,\n  mongoPort: mongoPort\n};\nmodule.exports = dbConfig;\n\n//# sourceURL=webpack:///./src/database/config.js?");
+eval("var mongoURI = 'mongodb://localhost/';\nvar mongoPort = '27017';\nvar dbName = 'chat';\nvar dbConfig = {\n  conStr: 'mongodb+srv://micky007:micky007@cluster0-2z5en.mongodb.net/test?retryWrites=true&w=majority',\n  // `mongodb+srv://micky007:micky007@inventorymanagement-2z5en.mongodb.net/${dbName}?retryWrites=true`\n  mongoPort: mongoPort\n};\nmodule.exports = dbConfig;\n\n//# sourceURL=webpack:///./src/database/config.js?");
 
 /***/ }),
 
