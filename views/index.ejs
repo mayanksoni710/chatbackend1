@@ -230,7 +230,7 @@ span.psw {
   }
 }
 
-.sendbuttonform {
+.displayNone {
   display: none;
 }
 </style>
@@ -256,9 +256,9 @@ span.psw {
         </form>
     </div>
 
-<div id="messages"></div>
+<div id="messages" class="displayNone"></div>
 
-<form id="sendbuttonform" class="sendbuttonform">
+<form id="sendbuttonform" class="displayNone">
   <input id="txt" autocomplete="off" class="Input" autofocus="on" placeholder="type your message here..." /><button class="buttonclass">Send</button>
 </form>
 
@@ -321,6 +321,7 @@ span.psw {
     $('#modelbox').submit(function(e){
       var modal = document.getElementById('id01');
       var sendbuttonform = document.getElementById('sendbuttonform');
+      var messagesElement= document.getElementById('messages');
       var username = document.getElementById('username').value;
       var password = document.getElementById('password').value;
       if(username.toLowerCase() === 'dikshu' && password.toLowerCase() === 'gadhu') {
@@ -328,6 +329,7 @@ span.psw {
         modal.style.display = "none";
         socket.emit('username', username);
         sendbuttonform.style.display = "block";
+        messagesElement.style.display = "block";
         return false;
       }
       if(username.toLowerCase() === 'mayank' && password.toLowerCase() === 'pglu') {
@@ -335,6 +337,7 @@ span.psw {
         modal.style.display = "none";
         socket.emit('username', username);
         sendbuttonform.style.display = "block";
+        messagesElement.style.display = "block";
         return false;
       }
       var errMsg = document.getElementById('errormsg');
