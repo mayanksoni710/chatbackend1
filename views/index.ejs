@@ -1,75 +1,127 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Mayank ♥ Diskhu</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font: 13px Helvetica, Arial; }
-        form { background: #fff; padding: 3px; position: fixed; bottom: 0; width: 100%; border-color: #000; border-top-style: solid; border-top-width: 1px;}
-        form input { border-style: solid; border-width: 1px; padding: 10px; width: 85%; margin-right: .5%; }
-        form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; margin-left: 2%; }
-        #messages { list-style-type: none; margin: 0; padding: 0; }
-        #messages li { padding: 5px 10px; }
-        #messages li:nth-child(odd) { background: #eee; }
-    </style>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-  </head>
-  <body>
-    <ul id="messages"></ul>
-    <form action="/" method="POST" id="chatForm">
-      <input id="txt" autocomplete="off" autofocus="on" placeholder="type your message here..." /><button>Send</button>
-    </form>
-    <script>
-            var socket = io.connect('https://chatbackend1.herokuapp.com/');
-            // submit text message without reload/refresh the page
-            $('form').submit(function(e){
-                e.preventDefault(); // prevents page reloading
-                socket.emit('chat_message', $('#txt').val());
-                $('#txt').val('');
-                return false;
-            });
+<head>
+<title>Mayank ♥ Diskhu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/socket.io/socket.io.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<style>
+body {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 0 20px;
+}
 
-            // append the chat text message
-            socket.on('chat_message', function(msg){
-                $('#messages').append($('<li>').html(msg));
-            });
+.container {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
 
-            // append text if someone is online
-            socket.on('is_online', function(username) {
-                $('#messages').append($('<li>').html(username));
-            });
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+}
 
-            socket.on('refresh', function(data) {
-                $('#messages').empty();
-                var i;
-                for (i = 0; i < data.length; i++) { 
-                  $('#messages').append($('<li>').html(`<strong>♥${data[i].name}♥</strong>: ${data[i].msg}`));
-                }
-            });
+.container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
 
-            // ask username
-            var username = prompt('Please tell me your name dikshu or mayank');
-            if (username === "") {
-              username = prompt('Enter Name: Please tell me your name dikshu or mayank');
-              if (username === "") {
-                username = prompt('Enter Name: Please tell me your name dikshu or mayank');
-                if (username === "") {
-                  username = prompt('Enter Name: Please tell me your name dikshu or mayank');
-                  if (username === "") {
-                    username = prompt('Enter Name: Please tell me your name dikshu or mayank');
-                  } else {
-                    socket.emit('username', username);
-                  }
-                } else {
-                    socket.emit('username', username);
-                }
-              } else {
-                socket.emit('username', username);
-              }
-            } else {
-              socket.emit('username', username);
-            }
-    </script>
-  </body>
+.container img {
+  float: left;
+  max-width: 60px;
+  max-height: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.container img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right:0;
+}
+
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+.time-left {
+  float: left;
+  color: #999;
+}
+</style>
+</head>
+<body >
+
+<div id="messages"></div>
+
+<form action="/" method="POST" id="chatForm">
+  <input id="txt" autocomplete="off" autofocus="on" placeholder="type your message here..." /><button>Send</button>
+</form>
+
+<script>
+    var socket = io.connect('http://localhost:3001/', { "forceBase64": 1 });
+    // submit text message without reload/refresh the page
+    $('form').submit(function(e){
+        e.preventDefault(); // prevents page reloading
+        socket.emit('chat_message', $('#txt').val());
+        $('#txt').val('');
+        return false;
+    });
+
+    // append the chat text message
+    socket.on('chat_message', function(data){
+        if(data.name == 'Dikshu') {
+            $('#messages').append($('<div class="container darker">').html(`<img src="/static/dikshu.jpg" class="right" alt="Avatar" style="width:100%;">
+              <p>${data.msg}</p>
+          <span class="time-right">11:00</span>`));
+        } else {
+                $('#messages').append($('<div class="container">').html(`<img src="/static/mayank.jpg" alt="Avatar" style="width:100%;">
+        <p>${data.msg}</p>
+        <span class="time-left">11:00</span>`));
+        }
+    });
+
+    // append text if someone is online
+    socket.on('is_online', function(username) {
+        $('#messages').append($('<p>').html(username));
+    });
+
+    socket.on('refresh', function(data) {
+        $('#messages').empty();
+        var i;
+        for (i = 0; i < data.length; i++) { 
+          if(data[i].name == 'Dikshu') {
+              $('#messages').append($('<div class="container darker">').html(`<img src="./static/dikshu.jpg" class="right" alt="Avatar" style="width:100%;">
+                <p>${data[i].msg}</p>
+            <span class="time-right">11:00</span>`));
+          } else {
+                  $('#messages').append($('<div class="container">').html(`<img src="./static/mayank.jpg" alt="Avatar" style="width:100%;">
+          <p>${data[i].msg}</p>
+          <span class="time-right">11:00</span>`));
+          }
+        }
+    });
+
+    // ask username
+    do{
+      username = prompt('Enter Name: dikshu or mayank');
+      console.log('username', username);
+      
+    }while(username == null || username == "" || (username.toLowerCase() !== 'dikshu' && username.toLowerCase() !== 'mayank'));
+    if(username.toLowerCase() === 'dikshu') {
+      username = 'Dikshu'
+    } else {
+      username = 'Mayank'
+    }
+    socket.emit('username', username);
+    
+</script>
+</body>
 </html>
