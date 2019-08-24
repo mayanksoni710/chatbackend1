@@ -290,6 +290,7 @@ span.psw {
         <p style="overflow-wrap: break-word;">${data.msg}</p>
         <span class="time-left">${data.date}${data.saved ? '' : ': msg sent but not stored in DB'}</span>`));
         }
+        window.scrollTo(0,document.body.scrollHeight);
     });
 
     // append text if someone is online
@@ -312,8 +313,8 @@ span.psw {
           }
           if(i == data.res.length - 1) {
             $('#messages').append($('<div>').html(`<p style="overflow-wrap: break-word;color: beige;">${data.name} joined chat</p>`));
-            window.scrollTo(0,document.body.scrollHeight);
           }
+          window.scrollTo(0,document.body.scrollHeight);
         }
     });
 
