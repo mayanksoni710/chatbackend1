@@ -55,6 +55,46 @@ body {
   float: left;
   color: #999;
 }
+
+.Input {
+  display: block;
+    width: 65%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    display: inline;
+}
+
+.buttonclass {
+  color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    margin-bottom: .5rem!important;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    display: inline;
+    margin-left: 40px;
+}
+
 </style>
 </head>
 <body >
@@ -62,11 +102,12 @@ body {
 <div id="messages"></div>
 
 <form action="/" method="POST" id="chatForm">
-  <input id="txt" autocomplete="off" autofocus="on" placeholder="type your message here..." /><button>Send</button>
+  <input id="txt" autocomplete="off" class="Input" autofocus="on" placeholder="type your message here..." /><button class="buttonclass">Send</button>
 </form>
 
 <script>
-    var socket = io.connect('https://chatbackend1.herokuapp.com/');
+    // var socket = io.connect('http://localhost:3001/', { "forceBase64": 1 });
+    var socket = io.connect('https://chatbackend1.herokuapp.com/', { "forceBase64": 1 });
     // submit text message without reload/refresh the page
     $('form').submit(function(e){
         e.preventDefault(); // prevents page reloading
@@ -79,11 +120,11 @@ body {
     socket.on('chat_message', function(data){
         if(data.name == 'Dikshu') {
             $('#messages').append($('<div class="container darker">').html(`<img src="/static/dikshu.jpg" class="right" alt="Avatar" style="width:100%;">
-              <p>${data.msg}</p>
+              <p style="overflow-wrap: break-word;">${data.msg}</p>
           <span class="time-right">11:00</span>`));
         } else {
                 $('#messages').append($('<div class="container">').html(`<img src="/static/mayank.jpg" alt="Avatar" style="width:100%;">
-        <p>${data.msg}</p>
+        <p style="overflow-wrap: break-word;">${data.msg}</p>
         <span class="time-left">11:00</span>`));
         }
     });
@@ -94,18 +135,23 @@ body {
     });
 
     socket.on('refresh', function(data) {
+      console.log('data', data);
+      
         $('#messages').empty();
         var i;
-        for (i = 0; i < data.length; i++) { 
-          if(data[i].name == 'Dikshu') {
+        for (i = 0; i < data.res.length; i++) { 
+          if(data.res[i].name == 'Dikshu') {
               $('#messages').append($('<div class="container darker">').html(`<img src="./static/dikshu.jpg" class="right" alt="Avatar" style="width:100%;">
-                <p>${data[i].msg}</p>
+                <p style="overflow-wrap: break-word;">${data.res[i].msg}</p>
             <span class="time-right">11:00</span>`));
           } else {
                   $('#messages').append($('<div class="container">').html(`<img src="./static/mayank.jpg" alt="Avatar" style="width:100%;">
-          <p>${data[i].msg}</p>
+          <p style="overflow-wrap: break-word;">${data.res[i].msg}</p>
           <span class="time-right">11:00</span>`));
           }
+          // if(i== data.res.length-1) {
+          //   $('#messages').append($('div').html(`<div>🔵 <i>♥${data.name}♥ join the chat 🔵</i></div>`));
+          // }
         }
     });
 
