@@ -230,7 +230,7 @@ span.psw {
   }
 }
 
-.chating {
+.chatting {
   display: none;
 }
 </style>
@@ -255,7 +255,7 @@ span.psw {
           </div>
         </form>
     </div>
-<div id="chating" >
+<div id="chatting" class="chatting">
   <div id="messages"></div>
   <form>
     <input id="txt" autocomplete="off" class="Input" autofocus="on" placeholder="type your message here..." /><button class="buttonclass">Send</button>
@@ -320,7 +320,7 @@ span.psw {
 
     $('#modelbox').submit(function(e){
       var modal = document.getElementById('id01');
-      var chattingSection = document.getElementById('chating');
+      var chattingSection = document.getElementById('chatting');
       var username = document.getElementById('username').value;
       var password = document.getElementById('password').value;
       if(username.toLowerCase() === 'dikshu' && password.toLowerCase() === 'gadhu') {
