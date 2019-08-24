@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="background-color: darkslategray;">
 <head>
 <title>Mayank ♥ Diskhu</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,9 +20,17 @@ body {
   margin: 10px 0;
 }
 
+.container-login {
+  border: 2px solid #dedede;
+  background-color: aliceblue;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
 .darker {
   border-color: #ccc;
-  background-color: #ddd;
+  background-color: #dce8f1ed;
 }
 
 .container::after {
@@ -58,7 +66,7 @@ body {
 
 .Input {
   display: block;
-    width: 65%;
+    width: 66%;
     padding: .375rem .75rem;
     font-size: 1rem;
     line-height: 1.5;
@@ -69,13 +77,13 @@ body {
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     display: inline;
+    float: left;
 }
 
 .buttonclass {
   color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
-    margin-bottom: .5rem!important;
+    background-color: #00adffb8;
+    margin-bottom: 2px;
     display: inline-block;
     font-weight: 400;
     text-align: center;
@@ -92,16 +100,165 @@ body {
     border-radius: .25rem;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     display: inline;
-    margin-left: 40px;
+    float: right;
 }
 
+/* model popup start */
+
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+/* Set a style for all buttons */
+.buttonlogin {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 2px;
+}
+
+.buttonlogin:hover {
+  opacity: 0.8;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+
+img.avatar {
+  width: 50%;
+  border-radius: 50%;
+  border: 1px solid #888;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #a0a0a0;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  border-radius: 5px;
+}
+
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+  
+@keyframes animatezoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+
+.sendbuttonform {
+  display: none;
+}
 </style>
 </head>
 <body >
 
+    <div id="id01" class="modal">
+  
+        <form id="modelbox" class="modal-content animate">
+          <div class="imgcontainer">
+            <img src="./static/together.jpeg" alt="Avatar" class="avatar">
+          </div>
+      
+          <div class="container-login">
+            <label for="uname"><b>Username</b></label>
+            <input id="username" type="text" placeholder="Enter Username" onfocus="document.getElementById('errormsg').style.display = 'none';" name="uname" required>
+      
+            <label for="psw"><b>Password</b></label>
+            <input id="password" type="password" placeholder="Enter Password" onfocus="document.getElementById('errormsg').style.display = 'none';" name="psw" required>
+            <span id="errormsg" style="color: firebrick;display: none">Invalid Credentials</span>
+            <button class="buttonlogin" type="submit">Login</button>
+          </div>
+        </form>
+    </div>
+
 <div id="messages"></div>
 
-<form action="/" method="POST" id="chatForm">
+<form id="sendbuttonform" class="sendbuttonform">
   <input id="txt" autocomplete="off" class="Input" autofocus="on" placeholder="type your message here..." /><button class="buttonclass">Send</button>
 </form>
 
@@ -109,10 +266,16 @@ body {
     // var socket = io.connect('http://localhost:3001/', { "forceBase64": 1 });
     var socket = io.connect('https://chatbackend1.herokuapp.com/', { "forceBase64": 1 });
     // submit text message without reload/refresh the page
-    $('form').submit(function(e){
+    $('#sendbuttonform').submit(function(e){
         e.preventDefault(); // prevents page reloading
-        socket.emit('chat_message', $('#txt').val());
+        var today = new Date();
+        var date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
+        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        var dateTime = date+' '+time;
+        socket.emit('chat_message',{message: $('#txt').val(), date: dateTime});
         $('#txt').val('');
+        var txtbox = document.getElementById('txt');
+        txtbox.focus();
         return false;
     });
 
@@ -121,53 +284,62 @@ body {
         if(data.name == 'Dikshu') {
             $('#messages').append($('<div class="container darker">').html(`<img src="/static/dikshu.jpg" class="right" alt="Avatar" style="width:100%;">
               <p style="overflow-wrap: break-word;">${data.msg}</p>
-          <span class="time-right">11:00</span>`));
+          <span class="time-right">${data.date}${data.saved ? '' : ': msg sent but not stored in DB'}</span>`));
         } else {
                 $('#messages').append($('<div class="container">').html(`<img src="/static/mayank.jpg" alt="Avatar" style="width:100%;">
         <p style="overflow-wrap: break-word;">${data.msg}</p>
-        <span class="time-left">11:00</span>`));
+        <span class="time-left">${data.date}${data.saved ? '' : ': msg sent but not stored in DB'}</span>`));
         }
     });
 
     // append text if someone is online
     socket.on('is_online', function(username) {
-        $('#messages').append($('<p>').html(username));
+        $('#messages').append($('<p style="overflow-wrap: break-word;color: beige;">').html(username));
     });
 
     socket.on('refresh', function(data) {
-      console.log('data', data);
-      
         $('#messages').empty();
         var i;
         for (i = 0; i < data.res.length; i++) { 
           if(data.res[i].name == 'Dikshu') {
               $('#messages').append($('<div class="container darker">').html(`<img src="./static/dikshu.jpg" class="right" alt="Avatar" style="width:100%;">
                 <p style="overflow-wrap: break-word;">${data.res[i].msg}</p>
-            <span class="time-right">11:00</span>`));
+            <span class="time-right">${data.res[i].date}</span>`));
           } else {
                   $('#messages').append($('<div class="container">').html(`<img src="./static/mayank.jpg" alt="Avatar" style="width:100%;">
           <p style="overflow-wrap: break-word;">${data.res[i].msg}</p>
-          <span class="time-right">11:00</span>`));
+          <span class="time-right">${data.res[i].date}</span>`));
           }
-          // if(i== data.res.length-1) {
-          //   $('#messages').append($('div').html(`<div>🔵 <i>♥${data.name}♥ join the chat 🔵</i></div>`));
-          // }
+          if(i == data.res.length - 1) {
+            $('#messages').append($('<div>').html(`<p style="overflow-wrap: break-word;color: beige;">${data.name} joined chat</p>`));
+            window.scrollTo(0,document.body.scrollHeight);
+          }
         }
     });
 
-    // ask username
-    do{
-      username = prompt('Enter Name: dikshu or mayank');
-      console.log('username', username);
-      
-    }while(username == null || username == "" || (username.toLowerCase() !== 'dikshu' && username.toLowerCase() !== 'mayank'));
-    if(username.toLowerCase() === 'dikshu') {
-      username = 'Dikshu'
-    } else {
-      username = 'Mayank'
-    }
-    socket.emit('username', username);
-    
+    $('#modelbox').submit(function(e){
+      var modal = document.getElementById('id01');
+      var sendbuttonform = document.getElementById('sendbuttonform');
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+      if(username.toLowerCase() === 'dikshu' && password.toLowerCase() === 'gadhu') {
+        username = 'Dikshu'
+        modal.style.display = "none";
+        socket.emit('username', username);
+        sendbuttonform.style.display = "block";
+        return false;
+      }
+      if(username.toLowerCase() === 'mayank' && password.toLowerCase() === 'pglu') {
+        username = 'Mayank'
+        modal.style.display = "none";
+        socket.emit('username', username);
+        sendbuttonform.style.display = "block";
+        return false;
+      }
+      var errMsg = document.getElementById('errormsg');
+      errMsg.style.display = "block";
+      return false;
+    });
 </script>
 </body>
 </html>
