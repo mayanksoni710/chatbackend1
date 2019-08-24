@@ -230,7 +230,7 @@ span.psw {
   }
 }
 
-.sendbuttonform {
+.chating {
   display: none;
 }
 </style>
@@ -255,12 +255,12 @@ span.psw {
           </div>
         </form>
     </div>
-
-<div id="messages"></div>
-
-<form id="sendbuttonform" class="sendbuttonform">
-  <input id="txt" autocomplete="off" class="Input" autofocus="on" placeholder="type your message here..." /><button class="buttonclass">Send</button>
-</form>
+<div id="chating" >
+  <div id="messages"></div>
+  <form>
+    <input id="txt" autocomplete="off" class="Input" autofocus="on" placeholder="type your message here..." /><button class="buttonclass">Send</button>
+  </form>
+</div>
 
 <script>
     // var socket = io.connect('http://localhost:3001/', { "forceBase64": 1 });
@@ -320,21 +320,21 @@ span.psw {
 
     $('#modelbox').submit(function(e){
       var modal = document.getElementById('id01');
-      var sendbuttonform = document.getElementById('sendbuttonform');
+      var chattingSection = document.getElementById('chating');
       var username = document.getElementById('username').value;
       var password = document.getElementById('password').value;
       if(username.toLowerCase() === 'dikshu' && password.toLowerCase() === 'gadhu') {
         username = 'Dikshu'
         modal.style.display = "none";
         socket.emit('username', username);
-        sendbuttonform.style.display = "block";
+        chattingSection.style.display = "block";
         return false;
       }
       if(username.toLowerCase() === 'mayank' && password.toLowerCase() === 'pglu') {
         username = 'Mayank'
         modal.style.display = "none";
         socket.emit('username', username);
-        sendbuttonform.style.display = "block";
+        chattingSection.style.display = "block";
         return false;
       }
       var errMsg = document.getElementById('errormsg');
