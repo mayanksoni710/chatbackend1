@@ -66,7 +66,7 @@ body {
 </form>
 
 <script>
-    var socket = io.connect('https://chatbackend1.herokuapp.com/', { "forceBase64": 1 });
+    var socket = io.connect('https://chatbackend1.herokuapp.com/');
     // submit text message without reload/refresh the page
     $('form').submit(function(e){
         e.preventDefault(); // prevents page reloading
